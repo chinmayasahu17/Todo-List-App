@@ -1,7 +1,7 @@
 {
   "name": "todolist-v1",
   "version": "1.0.0",
-  "description": "",
+  "description": "This Todo List App is a web-based application that provides users with a simple and efficient way to manage their daily tasks. Users can create new tasks, mark them as completed, and delete them from their list. The app uses HTML, CSS, JavaScript, Bootstrap, Node.js, EJS, and MongoDB to provide a seamless and responsive user experience. ## Features - Add a new task - Delete a task - Mark a task as complete ## Installation",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,6 @@
     "express": "^4.18.2",
     "lodash": "^4.17.21",
     "mongoose": "^7.0.1"
-  }
+  },
+  "devDependencies": {}
 }
