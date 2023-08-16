@@ -3,8 +3,25 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 require('dotenv').config(); 
+const mongoose = require('mongoose');
 
-const M_URl = process.env.MONGODB_URL;
+const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
+const MONGODB_URL = `mongodb+srv://chinmayasahu17:${encodeURIComponent(MONGODB_PASSWORD)}@cluster0.zk2jzum.mongodb.net/?retryWrites=true&w=majority`;
+
+mongoose.connect(MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+})
+.then(() => {
+  console.log('Connected to MongoDB');
+})
+.catch(error => {
+  console.error('Error connecting to MongoDB:', error);
+});
+
+
 
 
 
@@ -12,7 +29,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static("public"));
-mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
+//mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
 
 const itemsSchema = {
     name: String
