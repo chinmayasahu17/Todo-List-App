@@ -8,7 +8,7 @@ require('dotenv').config();
 const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
 const MONGODB_URL = `mongodb+srv://chinmayasahu17:${encodeURIComponent(MONGODB_PASSWORD)}@cluster0.zk2jzum.mongodb.net/?retryWrites=true&w=majority`;
 
-// Connect to MongoDB using Mongoose
+
 mongoose.connect("mongodb://localhost:27017/todolistDB")
 
 const app = express();
