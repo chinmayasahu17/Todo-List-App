@@ -3,27 +3,13 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 require('dotenv').config(); 
-const mongoose = require('mongoose');
 
+// Your MongoDB Atlas connection URI
 const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
 const MONGODB_URL = `mongodb+srv://chinmayasahu17:${encodeURIComponent(MONGODB_PASSWORD)}@cluster0.zk2jzum.mongodb.net/?retryWrites=true&w=majority`;
 
-mongoose.connect(MONGODB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true
-})
-.then(() => {
-  console.log('Connected to MongoDB');
-})
-.catch(error => {
-  console.error('Error connecting to MongoDB:', error);
-});
-
-
-
-
+// Connect to MongoDB using Mongoose
+mongoose.connect("mongodb://localhost:27017/todolistDB")
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -32,7 +18,7 @@ app.use(express.static("public"));
 //mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
 
 const itemsSchema = {
-    name: String
+    name: String 
 }
 const Item = mongoose.model("Item", itemsSchema);
 
@@ -72,7 +58,7 @@ app.get("/",function(req,res){
             res.render("list",{listTitle :"Today", newListItems :foundItems });
             
         }
-        console.log("data inserted");
+        // console.log("data inserted");
         
      }).catch(function(err){
         console.log(err);
@@ -153,6 +139,6 @@ app.get("/work",function(req, res){
 })
 
 
-app.listen(process.env.PORT ||3000, function(){
-    console.log("server starting at port 3000");
+app.listen(process.env.PORT ||4000, function(){
+    console.log("server starting at port 4000");
 })
