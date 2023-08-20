@@ -4,20 +4,19 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 require('dotenv').config(); 
 
-// Your MongoDB Atlas connection URI
+
 const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
 const dbURL = `mongodb+srv://admin-chinmay:${process.env.MONGODB_PASSWORD}@cluster0.zk2jzum.mongodb.net/todolistDB`;
 
 
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
 
-// mongoose.connect("mongodb+srv://admin-chinmay:00000000@cluster0.zk2jzum.mongodb.net/todolistDB")
 
 const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static("public"));
-//mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
 
 const itemsSchema = {
     name: String 
@@ -41,12 +40,6 @@ const listSchema = {
     items: [itemsSchema]
 };
 const List = mongoose.model("list", listSchema);
-// Item.insertMany(defaultItems)
-//     .then(() =>{
-//         console.log("data inserted");
-//     }).catch((err) =>{
-//         console.log(err);
-//     })
 
 app.get("/",function(req,res){
     
@@ -60,7 +53,7 @@ app.get("/",function(req,res){
             res.render("list",{listTitle :"Today", newListItems :foundItems });
             
         }
-        // console.log("data inserted");
+       
         
      }).catch(function(err){
         console.log(err);
@@ -147,5 +140,5 @@ if(port == null || port==""){
 }
 
 app.listen(port, function(){
-    console.log("server starting at port 3000");
+    console.log(`server starting at port ${port}`);
 })
