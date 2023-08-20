@@ -6,10 +6,12 @@ require('dotenv').config();
 
 // Your MongoDB Atlas connection URI
 const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
-const MONGODB_URL = `mongodb+srv://chinmayasahu17:${encodeURIComponent(MONGODB_PASSWORD)}@cluster0.zk2jzum.mongodb.net/?retryWrites=true&w=majority`;
+const dbURL = `mongodb+srv://admin-chinmay:${process.env.MONGODB_PASSWORD}@cluster0.zk2jzum.mongodb.net/todolistDB`;
 
 
-mongoose.connect("mongodb://localhost:27017/todolistDB")
+mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// mongoose.connect("mongodb+srv://admin-chinmay:00000000@cluster0.zk2jzum.mongodb.net/todolistDB")
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -71,6 +73,7 @@ app.get("/:customListName", function(req, res){
 
     List.findOne({name: customListName}).then(function(foundList){
         if(!foundList){
+            //create a new list if not found
             const list = new List({
         name: customListName,
         items: defaultItems
@@ -80,7 +83,7 @@ app.get("/:customListName", function(req, res){
         res.redirect("/"+customListName);
        
         }
-        else{
+        else{//show existing list
             res.render("list",{listTitle :foundList.name, newListItems :foundList.items });
         }
     });
@@ -94,7 +97,7 @@ app.post("/", function(req,res){
 
     const item = new Item({
         name: itemName
-    });
+    }); 
     if(listName === "Today"){
         item.save();
         res.redirect("/");
@@ -138,7 +141,11 @@ app.get("/work",function(req, res){
     res.render("list",{listTitle : "work", newListItems : workItems })
 })
 
+let port = process.env.PORT;
+if(port == null || port==""){
+    port = 3000;
+}
 
-app.listen(process.env.PORT ||4000, function(){
-    console.log("server starting at port 4000");
+app.listen(port, function(){
+    console.log("server starting at port 3000");
 })
