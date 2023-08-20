@@ -93,12 +93,15 @@ app.post("/", function(req,res){
     }); 
     if(listName === "Today"){
         item.save();
+        console.log("sucessfully added new item");
         res.redirect("/");
     }
     else{
         List.findOne({name: listName}).then(function(foundList){
             foundList.items.push(item);
             foundList.save();
+            console.log("sucessfully added new item");
+
             res.redirect("/"+ listName);
 
         })
