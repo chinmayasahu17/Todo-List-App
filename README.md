@@ -11,6 +11,12 @@ This Todo List App is a web-based application that provides users with a simple 
 3. Install the dependencies:npm install
 4. Start the server:node app.js
 5. Open the web application in your browser:http://localhost:3000
+   
+## Deployment
+
+The app has been deployed on Render and can be accessed at the following URL:
+[https://todo-list-188w.onrender.com](https://todo-list-188w.onrender.com)
+
 
 ## Technologies used
 
